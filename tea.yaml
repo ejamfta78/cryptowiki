@@ -1,0 +1,8 @@
+project:
+  name: cryptowiki
+  github_repository: ejamfta78/cryptowiki
+  constitution:
+    quorum_rules:
+      minimum_contributors: null
+      minimum_approval_percentage: null
+      minimum_deposit_percentage: null
