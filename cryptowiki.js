@@ -1,15 +1,9 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Function to retrieve cryptocurrency term definitions from Google
 function getDefinitionFromGoogle(term) {
-    // You need to add code to perform a search on Google and retrieve definitions from the search results.
-    // This involves using the Google Search API or web scraping techniques.
-    // After retrieving the definition, you need to assess the reliability of the information based on the source, reputation, and relevance.
-
     // Temporary example:
     const definition = "Definition from Google Search";
     const reliabilityScore = 70; // Example reliability score percentage
@@ -18,9 +12,6 @@ function getDefinitionFromGoogle(term) {
 
 // Function to retrieve cryptocurrency term definitions from Twitter
 function getDefinitionFromTwitter(term) {
-    // You need to add code to search for tweets from Twitter related to the cryptocurrency term.
-    // You also need to assess the reliability of the tweets based on the source, reputation, and relevance.
-
     // Temporary example:
     const definition = "Definition from Twitter";
     const reliabilityScore = 60; // Example reliability score percentage
@@ -29,8 +20,6 @@ function getDefinitionFromTwitter(term) {
 
 // Function to assess the reliability of information
 function assessReliability(reliabilityScore) {
-    // You can add additional logic here to assess reliability in more detail.
-    // For example, you can decide the reliability level based on the percentage score provided.
     let reliability;
     if (reliabilityScore >= 70) {
         reliability = "High";
@@ -42,7 +31,7 @@ function assessReliability(reliabilityScore) {
     return reliability;
 }
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 // Main route
 app.get('/', (req, res) => {
@@ -71,7 +60,7 @@ app.post('/search', (req, res) => {
         reliability = reliabilityTwitter;
     }
 
-    res.render('result.html', { term, definition, reliability });
+    res.send(`Term: ${term}, Definition: ${definition}, Reliability: ${reliability}`);
 });
 
 // Route to receive votes from users
@@ -87,4 +76,3 @@ app.post('/vote', (req, res) => {
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });
-
